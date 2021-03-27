@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:format="http://namedida.com.br/LocalDateTimeConverter">
+ 
+<h:head>
+</h:head>
+ 
+<ui:composition template="/template/layoutBase.xhtml">
+ 
+	<ui:define name="content">
+ 
+		<p:dialog header="Editar cadastro do Aluno" 
+				  id="dialog-modal-editar" 
+		   		  widgetVar="dialog-modal-editar" 
+		   		  modal="true" 
+		   		  height="400px"
+		   		  width="550px">
+ 
+    		 <ui:include src="/sistema/editarAluno.xhtml"/>
+  
+		</p:dialog>
+ 
+ 
+		<h:form style="margin:auto;margin-left:2%;" id="form-consulta">
+ 
+			<p:dataTable id="dataTable-registros"
+						 var="aluno" 
+						 value="#{consultarAlunoController.alunos}" 
+						 rows="15"
+						 paginator="true"
+						 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="5,10,15"
+                         style="width:98%;">
+ 
+						 <p:column headerText="Código">
+            				<h:outputText value="#{aluno.codigo}" />
+        				 </p:column>
+ 
+        				 <p:column headerText="Nome">
+            				<h:outputText value="#{aluno.nome}" />
+        				 </p:column>
+ 
+        				 <p:column headerText="Cartão">
+            				<h:outputText value="#{aluno.cartao}" />
+        				 </p:column>
+  
+        				 <p:column headerText="Email" style="width:200px;">
+            				<h:outputText value="#{aluno.email}" />
+        				 </p:column>
+ 
+         				 <p:column headerText="Cadastro">
+            				<h:outputText value="#{aluno.dataCadastro}">            					
+                                <format:LocalDateTimeConverter pattern="dd/MM/yyyy HH:mm:ss"/>   
+            				</h:outputText>
+        				 </p:column>
+ 
+        				 <p:column headerText="Usuário">
+            				<h:outputText value="#{aluno.usuarioModel.usuario}" />
+        				 </p:column>
+ 	                     <p:column headerText="" style="width:25px;">
+ 
+        				       <p:commandButton icon="ui-icon-pencil" 
+        				    				    title="Editar Registro"                        					 
+                        					    ajax="true"                        					 
+                        					    actionListener="#{consultarAlunoController.Editar(aluno)}"
+                        					    oncomplete="PF('dialog-modal-editar').show();" 
+                        					    update="dialog-modal-editar"/>
+ 
+        				 </p:column>
+ 
+        				 <p:column headerText="" style="width:25px;">
+        				 
+        				  <p:commandButton icon="ui-icon-trash" 
+        				    		     title="Excluir Registro"                        					 
+                        					 ajax="true"
+                        					 actionListener="#{consultarAlunoController.ExcluirAluno(aluno)}"
+                        					 update="@form" />
+ 
+        				 </p:column>
+  
+			</p:dataTable>
+ 
+		</h:form>
+ 
+	</ui:define>
+ 
+</ui:composition>
+</html>

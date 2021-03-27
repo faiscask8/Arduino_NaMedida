@@ -1,0 +1,107 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+ 
+    <h:form >
+ 
+       <h:panelGrid id="panelGrid-campos-form" columns="2" cellpadding="10">
+ 
+     	 <p:outputLabel value="Código" for="inputText-nome"/>
+	     <p:inputText   id="inputText-codigo"
+	        		    value="#{consultarCardapioController.cardapioModel.codigo}"
+	 	            	style="width:50px"
+	 		            readonly="true"/>
+ 
+ 
+	      <p:outputLabel value="Descrição" for="inputText-nome"/>
+	      <p:inputText   id="inputText-nome" 
+	                     style="width:300px" maxlength="100" 
+	                     value="#{consultarCardapioController.cardapioModel.descricao}"
+	                     required="true"
+	                     requiredMessage="O Cardápio é de preenchimento obrigatório"/>  
+      </h:panelGrid>                  
+ 	
+
+      <h:panelGrid id="panelGrid-campos2-form" columns="5" cellpadding="10">
+
+            <h:outputLabel value="Produto"/>
+
+                   <h:selectOneMenu id="id_produto" value="#{lancarItemCardapioController.itemCardapioModel.produtoModel}" 
+                                    require="true" requiredMessage="Campo obrigatório!" converter="SimpleEntityConverter" 
+                                    items="#{consultarProdutoController.produtos}" style="width: 110% !important">  
+                                    
+                            <f:selectItem itemLabel="-Selecione um Produto" itemValue=""/>  
+                            <f:selectItems value="#{consultarProdutoController.produtos}" var="produto"  itemLabel="#{produto.descricao}" itemValue="#{produto}"/>  
+                            <f:ajax render="input" />   
+                                                              
+                    </h:selectOneMenu>
+  
+	        <p:outputLabel value="Quant." for="inputText-quant"/>
+	        <p:inputText   id="inputText-quant" 
+	                       style="width:100px" maxlength="70" 
+	                       value="#{lancarItemCardapioController.itemCardapioModel.qt_quant}"
+	                       required="true"
+	                       requiredMessage="A Quantidade é de preenchimento obrigatório"/>  
+ 
+ 	        <p:commandButton value="Incluir" 
+	                    	 id="commandButton-Incluir"
+			                 icon="ui-icon-gear"
+			                 ajax="true"
+			                 actionListener="#{lancarItemCardapioController.SalvarNovoItemCardapio}"							 
+		                     update="panelGrid-campos2-form, @form" /> 
+  
+       </h:panelGrid>                  
+ 	
+ 	<p:spacer/>
+ 	 	
+ 	
+ 				<p:dataTable id="dataTable-registros"
+						 var="itemcardapio" 
+						 value="#{consultaritemCardapioController.itemCardapios}" 
+						 rows="15"
+						 paginator="true"
+						 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="5,10,15"
+                         style="width:98%;">
+  
+        				 <p:column headerText="Produto">
+            				<h:outputText value="#{itemcardapio.produtoModel.descricao}" />
+        				 </p:column>
+ 
+      			         <p:column headerText="Quantidade">
+            		         <h:outputText value="#{itemcardapio.qt_quant}">
+            		               <f:convertNumber pattern="#,##0.000" minFractionDigits="2"/>
+                             </h:outputText>            			                
+        				 </p:column>
+ 
+        				 <p:column headerText="" style="width:25px;">
+        				 
+        				  <p:commandButton icon="ui-icon-trash" 
+        				    		     title="Excluir Registro"                        					 
+                        					 ajax="true"
+                        					 actionListener="#{consultaritemCardapioController.ExcluirItemCardapio(itenscardapio)}"
+                        					 update="@form" />
+ 
+        				 </p:column>
+  
+			</p:dataTable>
+			
+        <p:spacer/>
+       <p:spacer/>
+ 	
+	<p:commandButton value="Alterar" 
+	            	 id="commandButton-alterar"
+			 icon="ui-icon-gear"
+	   actionListener="#{consultarCardapioController.AlterarRegistro}"							 
+			 oncomplete="PF('dialog-modal-editar').hide();"
+		         update="form-consulta"/> 
+  
+        <p:spacer/>
+	<p:messages showDetail="false" autoUpdate="true" closable="true" severity="error"/>
+ 
+ 
+    </h:form>
+ 
+</ui:composition>

@@ -1,0 +1,48 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+ 
+    <h:form>
+ 
+       <h:panelGrid id="panelGrid-campos-form" columns="2" cellpadding="10">
+ 
+	 <p:outputLabel value="Código" for="inputText-codigo"/>
+	 <p:inputText   id="inputText-codigo"
+	 		value="#{consultarUsuarioController.usuarioModel.codigo}"
+	 		style="width:50px"
+	 		readonly="true"/>
+ 
+ 
+	<p:outputLabel value="Usuário" for="inputText-usuario"/>
+	<p:inputText   id="inputText-usuario" 
+	               style="width:300px" maxlength="70" 
+	               value="#{consultarUsuarioController.usuarioModel.usuario}"
+	               required="true"
+	               requiredMessage="O Usuário é de preenchimento obrigatório"/>
+  
+	<p:outputLabel value="Senha" for="inputText-senha"/>
+	<p:password   id="inputText-senha" 
+	               style="width:300px" maxlength="70" 
+	               value="#{consultarUsuarioController.usuarioModel.senha}"
+	               required="true"
+	               requiredMessage="A Senha é de preenchimento obrigatório"/>
+
+ 	<p:spacer/>
+	<p:commandButton value="Alterar" 
+	            	 id="commandButton-alterar"
+			 icon="ui-icon-gear"
+	   actionListener="#{consultarUsuarioController.AlterarRegistro}"							 
+			 oncomplete="PF('dialog-modal-editar').hide();"
+		         update="form-consulta"/> 
+ 
+ 
+        <p:spacer/>
+	<p:messages showDetail="false" autoUpdate="true" closable="true" severity="error"/>
+ 
+     </h:panelGrid>                  
+ 
+    </h:form>
+ 
+</ui:composition>

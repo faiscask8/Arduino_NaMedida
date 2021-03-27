@@ -1,0 +1,44 @@
+/*tamanho da fonte dos componentes do primefaces*/
+.ui-widget {  
+	
+    font-size: 12px !important;  
+} 
+ 
+.fonteGrande {
+font-size: 250px !important;
+color: #2e8399;
+}
+
+.fonteMedia {
+font-size: 30px !important;
+color: #236474;
+weight:bold;
+}
+
+
+html,
+body {
+   margin:0;
+   padding:0;
+   height:100%;   
+}
+#content {
+ 
+   min-height:93%;
+   position:relative;
+}
+#header {
+   padding:0px;
+}
+#body {
+ 
+   padding:10px;
+   padding-bottom:60px;
+}
+#footer {
+   position:absolute;
+   bottom:0;
+   width:100%;
+   height:0px;  
+   background:#BDBDBD;
+}

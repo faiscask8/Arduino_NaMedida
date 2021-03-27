@@ -1,0 +1,110 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>br.com.namedida</groupId>
+  <artifactId>NaMedida</artifactId>
+  <packaging>war</packaging>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>AppJsf Maven Webapp</name>
+  <url>http://maven.apache.org</url>
+  <dependencies>
+ 
+    <!-- JSF -->
+    <dependency>
+	<groupId>com.sun.faces</groupId>
+	<artifactId>jsf-api</artifactId>
+	<version>2.2.13</version>
+    </dependency>
+ 
+	<!-- JSF -->
+    <dependency>
+	<groupId>com.sun.faces</groupId>
+	<artifactId>jsf-impl</artifactId>
+	<version>2.2.13</version>
+    </dependency>
+ 
+    <!-- PrimeFaces -->
+    <dependency>
+	<groupId>org.primefaces</groupId>
+	<artifactId>primefaces</artifactId>
+	<version>5.3</version>
+    </dependency>
+ 
+    <!-- CDI -->
+    <dependency>
+  	<groupId>javax.enterprise</groupId>
+  	<artifactId>cdi-api</artifactId>
+  	<version>1.2</version>
+  	<scope>provided</scope>
+    </dependency>
+ 
+    <!--JBoss/Weld implementação de referência do CDI 
+    	para Servlet Container(Exemplo:Tomcat)  -->
+    <dependency>  
+  	<groupId>org.jboss.weld.servlet</groupId>
+  	<artifactId>weld-servlet</artifactId>
+  	<version>2.2.6.Final</version>
+  	<scope>runtime</scope>
+    </dependency>
+ 
+    <!-- Métodos uteis para manipulação de String, métodos e etc-->
+    <dependency>
+  	<groupId>org.apache.commons</groupId>
+  	<artifactId>commons-lang3</artifactId>
+  	<version>3.4</version>
+    </dependency>
+ 
+    <!-- PROVIDER JPA(HIBERNATE) -->
+    <dependency>
+	<groupId>org.hibernate</groupId>
+	<artifactId>hibernate-entitymanager</artifactId>
+	<version>4.3.0.Final</version>
+    </dependency>
+ 
+    <!-- DEPENDENCIA MYSQL -->
+    <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+    <dependency>
+       <groupId>mysql</groupId>
+       <artifactId>mysql-connector-java</artifactId>
+       <version>8.0.12</version>
+    </dependency>
+
+ 
+    <!-- usado pelo Weld  -->
+    <dependency>
+	<groupId>org.jboss</groupId>
+	<artifactId>jandex</artifactId>
+	<version>1.2.2.Final</version>
+    </dependency>
+ 
+    <!-- Manipulação de XML -->
+    <dependency>
+	<groupId>jdom</groupId>
+	<artifactId>jdom</artifactId>
+	<version>1.1</version>
+    </dependency>
+ 
+    <!-- Jasper -->
+ 	<dependency>
+	<groupId>net.sf.jasperreports</groupId>
+	<artifactId>jasperreports</artifactId>
+	<version>6.5.1</version>
+    </dependency>
+		
+  </dependencies>
+ 
+  <build>
+    <finalName>NaMedida</finalName>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.5.1</version>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

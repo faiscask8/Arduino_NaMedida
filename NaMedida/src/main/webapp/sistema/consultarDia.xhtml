@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:format="http://namedida.com.br/LocalDateTimeConverter">
+ 
+<h:head>
+</h:head>
+ 
+<ui:composition template="/template/layoutBase.xhtml">
+ 
+	<ui:define name="content">
+ 
+		<p:dialog header="Editar cadastro de Dias da Semana" 
+				  id="dialog-modal-editar" 
+		   		  widgetVar="dialog-modal-editar" 
+		   		  modal="true" 
+		   		  height="400px"
+		   		  width="550px">
+ 
+    		 <ui:include src="/sistema/editarDia.xhtml"/>
+  
+		</p:dialog>
+ 
+ 
+		<h:form style="margin:auto;margin-left:2%;" id="form-consulta">
+ 
+			<p:dataTable id="dataTable-registros"
+						 var="dia" 
+						 value="#{consultarDiaController.dias}" 
+						 rows="15"
+						 paginator="true"
+						 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="5,10,15"
+                         style="width:98%;">
+ 
+						 <p:column headerText="Código">
+            				<h:outputText value="#{dia.codigo}" />
+        				 </p:column>
+ 
+        				 <p:column headerText="Nome">
+            				<h:outputText value="#{dia.descricao}" />
+        				 </p:column>
+ 
+         				 <p:column headerText="Cardápio">
+            				<h:outputText value="#{dia.cardapioModel.descricao}" />
+        				 </p:column>
+ 
+	                     <p:column headerText="" style="width:25px;">
+ 
+        				       <p:commandButton icon="ui-icon-pencil" 
+        				    				    title="Editar Registro"                        					 
+                        					    ajax="true"                        					 
+                        					    actionListener="#{consultarDiaController.Editar(dia)}"
+                        					    oncomplete="PF('dialog-modal-editar').show();" 
+                        					    update="dialog-modal-editar"/>
+ 
+        				 </p:column>
+ 
+        				 <p:column headerText="" style="width:25px;">
+        				 
+        				  <p:commandButton icon="ui-icon-trash" 
+        				    		     title="Excluir Registro"                        					 
+                        					 ajax="true"
+                        					 actionListener="#{consultarDiaController.Excluirdia(dia)}"
+                        					 update="@form" />
+ 
+        				 </p:column>
+  
+			</p:dataTable>
+ 
+		</h:form>
+ 
+	</ui:define>
+ 
+</ui:composition>
+</html>

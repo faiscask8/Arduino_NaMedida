@@ -1,0 +1,39 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+ 
+	<h:form>
+        <p:graphicImage url="/resources/imagens/topo.png" />
+		<p:menubar style="background-color:#2e8399;border:10px;color:#565656;">
+	
+			<p:menuitem value="Home" icon="ui-icon-home" url="home.xhtml" />
+			<p:submenu label="Cadastro">
+			   <p:menuitem value="Cadastro de Alunos" icon="ui-icon-document" url="cadastrarAluno.xhtml" />
+			   <p:menuitem value="Cadastro de Cardápios" icon="ui-icon-document" url="cadastrarCardapio.xhtml" />
+			   <p:menuitem value="Cadastro do Dia da Semana" icon="ui-icon-document" url="cadastrarDia.xhtml" />
+			   <p:menuitem value="Cadastro de Produtos" icon="ui-icon-document" url="cadastrarProduto.xhtml" />
+		       <p:menuitem value="Cadastro de Usuários" icon="ui-icon-document" url="cadastrarUsuario.xhtml"/>
+			</p:submenu>
+
+			<p:submenu label="Refeições">
+			   <p:menuitem value="Gerar Refeições" icon="ui-icon-document" url="gerarRefeicoes.xhtml" />
+			</p:submenu>
+
+			<p:submenu label="Consulta">
+			   <p:menuitem value="Relação de Alunos" icon="ui-icon-document" url="consultarAluno.xhtml" /> 
+			   <p:menuitem value="Relação de Cardápios" icon="ui-icon-document" url="consultarCardapio.xhtml" /> 
+			   <p:menuitem value="Relação de Produtos" icon="ui-icon-document" url="consultarProduto.xhtml" /> 			   
+			   <p:menuitem value="Relação de Dias" icon="ui-icon-document" url="consultarDia.xhtml" /> 
+			   <p:menuitem value="Relação de Usuários" icon="ui-icon-document" url="consultarUsuario.xhtml" /> 			   
+			</p:submenu>
+ 
+		<f:facet name="options">            
+            	        <p:commandButton value="Logout" icon="ui-icon-extlink" action="#{usuarioController.Logout}"/>
+        	</f:facet>
+		</p:menubar>
+ 
+	</h:form>
+ 
+</html>

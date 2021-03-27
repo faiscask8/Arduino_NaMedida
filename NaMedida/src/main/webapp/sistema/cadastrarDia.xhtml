@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+ 
+<h:head>
+</h:head>
+ 
+<ui:composition template="/template/layoutBase.xhtml">
+ 
+ 
+	<ui:define name="content">
+ 
+		   <p:tabView style="width:600px;height:370px;margin:auto;">
+	 		 	<p:tab title="Cadastro um Dia">
+ 
+	 		 	<h:form id="form-cadastro">	 	
+ 
+	 		 	<h:panelGrid id="panelGrid-campos-form" columns="2" cellpadding="10">
+ 
+	 		 			<p:outputLabel value="Dia da Semana" for="inputText-descricao"/>
+	            		<p:inputText id="inputText-descricao" 
+	            				  style="width:300px" maxlength="70" 
+	            				  value="#{cadastrarDiaController.diaModel.descricao}"
+	            				  required="true"
+	            				  requiredMessage="A Descrição é de preenchimento obrigatório"/>
+	      
+	                <h:outputLabel value="Cardápio *"/>
+	            	
+	            	     <h:selectOneMenu id="id_cardapio" value="#{cadastrarDiaController.diaModel.cardapioModel}" 
+	            	                      required="true" requiredMessage="O Cardápio e Obrigatório!" converter="SimpleEntityConverter"
+	            	                      items="#{consultarCardapioController.cardapios}" style="width: 92% !important">  
+                             <f:selectItem itemLabel="-Selecione um Cardapio" itemValue=""/>  
+                             <f:selectItems value="#{consultarCardapioController.cardapios}" var="cardapio"  
+                                            itemLabel="#{cardapio.descricao}" itemValue="#{cardapio}"/>  
+                             <f:ajax render="input" />                                     
+                         </h:selectOneMenu>
+    
+	             		<p:spacer/>
+ 
+	            		<p:commandButton value="Salvar" 
+	            				 id="commandButton-salvar"
+						 icon="ui-icon-gear"
+						 actionListener="#{cadastrarDiaController.SalvarNovoDia}"
+						 update="panelGrid-campos-form"/>
+ 
+ 
+	 		 	</h:panelGrid>
+ 
+	 		 		<p:messages showDetail="true" autoUpdate="true" closable="true" severity="warn"/>
+	 		 		<p:messages autoUpdate="true" closable="true" severity="error"/>		
+		   			<p:messages showDetail="true" autoUpdate="true" closable="true" severity="info"/>
+ 
+	 		 		</h:form>
+ 
+	 			 </p:tab>		 		
+ 
+	 		</p:tabView>
+ 
+ 
+ 
+ 
+ 
+	</ui:define>
+ 
+</ui:composition>
+ 
+ 
+</html>

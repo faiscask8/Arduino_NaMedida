@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+ 
+<h:head>
+</h:head>
+ 
+<ui:composition template="/template/layoutBase.xhtml">
+ 
+ 
+	<ui:define name="content">
+ 
+		   <p:tabView style="width:600px;height:370px;margin:auto;">
+	 		 	<p:tab title="Cadastro de Aluno">
+ 
+	 		 	<h:form id="form-cadastro">	 	
+ 
+	 		 	<h:panelGrid id="panelGrid-campos-form" columns="2" cellpadding="10">
+ 
+	 		 			<p:outputLabel value="Nome" for="inputText-nome"/>
+	            		<p:inputText id="inputText-nome" 
+	            				  style="width:300px" maxlength="70" 
+	            				  value="#{cadastrarAlunoController.alunoModel.nome}"
+	            				  required="true"
+	            				  requiredMessage="O nome é de preenchimento obrigatório"/>
+ 
+	            		<p:outputLabel value="Cartão" for="inputText-cartao"/>
+	            		<p:inputText id="inputText-cartao" 
+	            			     style="width:400px" 
+	            			     maxlength="200" 
+	            			     value="#{cadastrarAlunoController.alunoModel.cartao}"
+	            			     required="true"
+	            		             requiredMessage="O Cartão é de preenchimento obrigatório"/>
+ 
+	            		<p:outputLabel value="E-mail" for="inputText-email"/>
+	            		<p:inputText id="inputText-email" 
+	            			     style="width:300px" 
+	            			     maxlength="80" 
+	            			     value="#{cadastrarAlunoController.alunoModel.email}"
+	            			     required="false"
+	            			     requiredMessage="O email é de preenchimento obrigatório"/>           		
+ 
+	            		<p:spacer/>
+ 
+	            		<p:commandButton value="Salvar" 
+	            				 id="commandButton-salvar"
+						 icon="ui-icon-gear"
+						 actionListener="#{cadastrarAlunoController.SalvarNovoAluno}"
+						 update="panelGrid-campos-form"/>
+ 
+ 
+	 		 	</h:panelGrid>
+ 
+	 		 		<p:messages showDetail="true" autoUpdate="true" closable="true" severity="warn"/>
+	 		 		<p:messages autoUpdate="true" closable="true" severity="error"/>		
+		   			<p:messages showDetail="true" autoUpdate="true" closable="true" severity="info"/>
+ 
+	 		 		</h:form>
+ 
+	 			 </p:tab>		 		
+ 
+	 		</p:tabView>
+ 
+ 
+ 
+ 
+ 
+	</ui:define>
+ 
+</ui:composition>
+ 
+ 
+</html>

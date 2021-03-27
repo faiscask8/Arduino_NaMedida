@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+ 
+<h:head>
+</h:head>
+ 
+<ui:composition template="/template/layoutBase.xhtml">
+ 
+	<ui:define name="content">
+ 
+    <p:tabView style="width:600px;height:420px;margin:auto;">
+	    <p:tab title="Refeições">
+ 
+ 	       <h:form style="margin:auto;margin-left:2%;" id="form-consulta">
+		           <f:event listener="#{consultarMedidaController.TotalAlunos}" update="inputText-quant" type="preRenderView" /> 
+		           <f:event listener="#{consultarMedidaController.DiaHoje}" update="inputText-dia" type="preRenderView" /> 		           
+	               <f:event listener= "#{consultarDiaController.GetCardapioDia}" update="inputText-cardapio" type="preRenderView" />
+		           <f:event listener= "#{consultaritemCardapioController.itemsRefeicao}" update="form-consulta2" type="preRenderView" />
+		    	 
+		    	   <h:panelGrid id="panelGrid-Result" columns="1" cellpadding="10">
+	    	   
+      	    	 <p:outputLabel value="QUANTIDADE DE REFEIÇÕES" for="inputText-quant" styleClass="fonteGrande"
+      	    	 	            style="font-weight:bold"/>
+      	    	 	            	              		          
+	            		<p:outputLabel id="inputText-quant" styleClass="fonteGrande"
+	            	              	style="font-weight:bold"
+	            			     maxlength="80" 
+	            			     value="#{consultarMedidaController.medidaModel.totalhoje}"	
+	            			     readonly="true"/>  
+	            	     <p:poll interval="3" listener="#{consultarMedidaController.TotalAlunos}" update="inputText-quant" />
+	            			     	            			                      
+	     	      </h:panelGrid>
+	
+		  </h:form>
+
+	     </p:tab>		 		
+ 
+ 	   <p:tab title="Itens do Cardápio">
+ 	         <h:form style="margin:auto;margin-left:2%;" id="form-consulta2">
+			
+		    	   <h:panelGrid id="panelGrid-ResultTOP" columns="3" cellpadding="10">	    	   	    	 	            	              	
+	            		
+	              		<p:outputLabel id="inputText-dia" styleClass="fonteMedia"
+	            	              	style="font-weight:bold"
+	            			    maxlength="80" 
+	            			        value="#{consultarMedidaController.medidaModel.diahoje}"	
+	            			     readonly="true"/>   
+	
+	              		<p:outputLabel id="inputText-tracinho" styleClass="fonteMedia"
+	            	              	style="font-weight:bold"
+	            			    maxlength="80" 
+	            			        value="-"	
+	            			     readonly="true"/>   
+	
+	    		<p:outputLabel id="inputText-cardapio" styleClass="fonteMedia"
+	            	               	style="font-weight:bold"
+	            			    maxlength="80" 
+	            			        value="#{consultarDiaController.diaModel.cardapiohoje}"	
+	            			     readonly="true"/>   
+		     	      </h:panelGrid>
+	
+		    	   <h:panelGrid id="panelGrid-Result" columns="1" cellpadding="10">	    	   	    	 	            	              	
+	
+			         	<p:dataTable id="dataTable-registros"
+					            	 var="itemcardapio" 
+				             		 value="#{consultaritemCardapioController.itemCardapiosTotal}" 
+				             		 rows="6"
+					             	 paginator="true"
+					              	 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     rowsPerPageTemplate="5,10"
+                                     style="width:98%;">
+  
+        			            	 <p:column headerText="Produto">
+            		            		<h:outputText value="#{itemcardapio.produtoModel.descricao}" />	
+        			            	 </p:column>
+ 
+         			               	 <p:column headerText="Quantidade">
+            		               		<h:outputText value="#{itemcardapio.qt_quant}">
+            		               		     <f:convertNumber pattern="#,##0.000" minFractionDigits="2"/>
+                                        </h:outputText>            			                
+        				             </p:column>
+ 
+        
+			             </p:dataTable>
+		            </h:panelGrid>
+		            
+		            
+		    	   <h:panelGrid id="panelGrid-Result2" columns="3" cellpadding="30">	    	   	    	 	            	              	
+		             
+		           	  <p:poll interval="4" listener="#{consultaritemCardapioController.itemsRefeicao}" update="form-consulta2" />
+	
+			          <p:commandButton value="Gerar Refeições"
+			                           icon="ui-icon-gear" 
+                        			   actionListener="#{lancarRefeicoesController.SalvarNovaRefeicao}"
+                        			   update="form-consulta2" />
+   
+   	                  <p:commandButton value=".: imprimir :." 
+	            				       id="commandButton-update"
+						               icon="ui-icon-gear"
+                                       style="height:23px;width:140px;"
+						               actionListener="#{lancarRefeicoesController.Imprimir}"					      
+					                   update="form-consulta2"
+					                   ajax="false"
+					                   onclick="this.form.target='_blank'"/>
+                     
+	     	      </h:panelGrid>
+			  </h:form>
+	
+       </p:tab>		 		
+ 
+	</p:tabView>
+ 
+	</ui:define>
+ 
+</ui:composition>
+</html>

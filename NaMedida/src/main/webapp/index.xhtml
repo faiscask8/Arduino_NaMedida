@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+ 
+	<h:head>
+ 
+		<h:outputStylesheet library="css" name="default.css"/>
+ 
+	</h:head>
+ 
+	<h:body style="display:flex;">
+ 
+ 
+		<h:form style=" margin:auto;">
+ 
+		    <p:growl id="growl-mensagem" showDetail="true" sticky="true" /> 
+ 
+		    <p:panel id="panel-login-principal" 
+		    		 header="Login" 
+		    		 footer="Sistema Na Medida" 
+		    		 style="width:400px;">
+ 
+	        	<h:panelGrid columns="2" cellpadding="10">
+ 
+	            	<p:graphicImage url="/resources/imagens/login.png" />
+ 
+	            	<h:panelGrid columns="2" cellpadding="5">
+	            		<p:outputLabel value="Login"/>
+	            		<p:inputText id="inputText-login" 
+	            			     value="#{usuarioController.usuarioModel.usuario}"/>
+ 
+	            		<p:outputLabel value="Senha"/>
+	            		<p:password id="password-usuario" 
+	            			    value="#{usuarioController.usuarioModel.senha}"/>
+ 
+	            		&nbsp;
+	            		<p:commandButton value="Acessar" 
+	            				 id="commandButton-acessar"
+						 icon="ui-icon-gear"
+						 action="#{usuarioController.EfetuarLogin}"
+						 update="growl-mensagem" />
+ 
+	            	</h:panelGrid>
+ 
+	            </h:panelGrid>
+ 
+	    	</p:panel>
+ 
+		</h:form>
+ 
+	</h:body>
+</html>
